@@ -1,0 +1,41 @@
+- name: Create project directory
+  file:
+    path: /opt/grafana_vm
+    state: directory
+
+
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /opt/grafana_vm/docker-compose.yml
+    mode: '0644'
+    
+- name: Copy victoria_metrics.yml
+  copy:
+    src: ./provisioning/datasources/victoria_metrics.yml
+    dest: /opt/grafana_vm/victoria_metrics.yml
+    mode: '0644'
+
+#- name: Upload promscrape.yml
+#  ansible.builtin.template:
+#    src: ./templates/promscrape.yml.j2
+#    dest: /opt/grafana_vm/promscrape.yml
+#    mode: '0644'
+#    
+#- name: Upload host_metrics_targets.json
+#  ansible.builtin.template:
+#    src: ./templates/host_metrics_targets.json.j2
+#    dest: /opt/grafana_vm/host_metrics_targets.json
+#    mode: '0644'    
+    
+- name: Copy .env
+  copy:
+    src: .env
+    dest: /opt/grafana_vm/.env
+    mode: '0600'
+    
+
+- name: Launch stack
+  shell: docker compose up -d
+  args:
+    chdir: /opt/grafana_vm

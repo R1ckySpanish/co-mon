@@ -1,0 +1,38 @@
+services:
+
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics
+    ports:
+      - '8428:8428'
+    volumes:
+      - 'vm_data:/storage'
+    command:
+      - '-storageDataPath=/storage'
+      - '-httpListenAddr=:8428'
+      - '-selfScrapeInterval=15s'
+      - '-promscrape.fileSDCheckInterval=1m'
+    restart: always      
+
+     
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    depends_on:
+      - 'victoriametrics'
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    volumes:
+      - 'grafana_data:/var/lib/grafana/'
+      - './victoria_metrics.yml:/etc/grafana/provisioning/datasources/victoria_metrics.yml:ro'
+    
+
+
+
+volumes:
+  vm_data: {}
+  grafana_data: {}

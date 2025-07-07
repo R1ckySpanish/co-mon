@@ -1,0 +1,35 @@
+
+- name: Create project directory
+  file:
+    path: /opt/vm_agent
+    state: directory
+
+
+- name: Upload promscrape.yml
+  ansible.builtin.template:
+    src: ./templates/promscrape.yml.j2
+    dest: /opt/vm_agent/promscrape.yml
+    mode: '0644'
+    
+- name: Upload host_metrics_targets.json
+  ansible.builtin.template:
+    src: ./templates/host_metrics_targets.json.j2
+    dest: /opt/vm_agent/host_metrics_targets.json
+    mode: '0644'  
+
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /opt/vm_agent/docker-compose.yml
+    mode: '0644'    
+    
+- name: Copy .env
+  copy:
+    src: .env
+    dest: /opt/vm_agent/.env
+    mode: '0600'
+    
+- name: Launch vm_agent
+  shell: docker compose up -d
+  args:
+    chdir: /opt/vm_agent
