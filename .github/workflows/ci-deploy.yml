@@ -3,7 +3,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HOSTS: '${{ HOSTS }}'
+      HOSTS: "${{ vars.HOSTS }}"
 
     steps:
       - name: Checkout
