@@ -30,5 +30,8 @@ jobs:
 
       - name: Run playbook
         run: |
+          pwd
+          ls -la
+          find / -iname "playbook.yml"
           ansible-playbook all -i inventory.yml -o StrictHostKeyChecking=no  playbook.yml
           eval "${(ssh-agent -k)}"
