@@ -3,28 +3,28 @@ all:
     ansible_user: ansible
     ansible_ssh_private_key_file: /home/ansible/.ssh/ansible.key
     env:
-      env:
+      HOSTS: ${{ vars.HOSTS }}
     
     
   children:
     vps:
       hosts:
         ru:
-          ansible_host: ${{ vars.HOSTS['ru'] }}
+          ansible_host: ${ HOSTS["ru"] }
         kz:
-          ansible_host: ${{ vars.HOSTS['kz'] }}
+          ansible_host: ${ HOSTS["kz"] }
         eu:
-          ansible_host: ${{ vars.HOSTS['eu'] }}
+          ansible_host: ${ HOSTS["eu"] }
           
     main_node:
       hosts:
         ru:
-          ansible_host: ${{ vars.HOSTS['ru'] }}
+          ansible_host: ${ HOSTS["ru"] }
 
        
     vm_agent:
       hosts:
         kz:
-          ansible_host: ${{ vars.HOSTS['kz'] }}
+          ansible_host: ${ HOSTS["kz"] }
 
         
