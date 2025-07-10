@@ -4,7 +4,7 @@ all:
     ansible_ssh_private_key_file: /home/ansible/.ssh/ansible.key
     env:
       HOSTS_JSON: ${{ vars.HOSTS_JSON }}
-      ru_ip: $(echo "$HOSTS_JSON" | jq -r .ru)
+      ru_ip: ${(echo "$HOSTS_JSON" | jq -r .ru)}
       kz_ip: $(echo "$HOSTS_JSON" | jq -r .kz)
       eu_ip: $(echo "$HOSTS_JSON" | jq -r .eu)
     
