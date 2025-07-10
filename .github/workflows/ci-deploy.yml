@@ -22,6 +22,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible
 
+      - name: make inventory-dev.yml
+        run: |
+          cat > inventory-dev.yml <<EOF
+          all:
+            hosts:
+              ru:
+                ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
+              kz:
+                ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
+              eu:
+                ansible_host: $(echo "$HOSTS_JSON" | jq -r .eu)
+          EOF    
+
+
+          
+
       - name: Add SSH key
         run: |
           eval $(ssh-agent -s)
@@ -33,5 +49,5 @@ jobs:
           pwd
           ls -la
           cat inventory.yml
-          ansible-playbook -i inventory.yml playbook.yml -e "HOSTS=some_value"
+          ansible-playbook -i inventory-dev.yml playbook.yml -e "HOSTS=some_value"
           eval "${(ssh-agent -k)}"
