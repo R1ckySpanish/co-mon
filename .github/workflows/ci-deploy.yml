@@ -32,14 +32,14 @@ jobs:
           
           cat <<EOF > inventory-dev.yml
     
-        all:
-          hosts:
-            ru:
-              ansible_host: $ru_ip
-            kz:
-              ansible_host: $kz_ip
-            eu:
-              ansible_host: $eu_ip EOF
+all:
+  hosts:
+    ru:
+      ansible_host: $ru_ip
+    kz:
+      ansible_host: $kz_ip
+    eu:
+      ansible_host: $eu_ip EOF
 
           
 
