@@ -7,9 +7,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      HOSTS: ${{ vars.HOSTS }}
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -30,27 +28,6 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-
-      - name: Parse HOSTS and generate inventory.yml
-        run: |
-          echo "$HOSTS" | jq -r '
-            {
-              vps: {
-                hosts: {
-                  ru: { ansible_host: .ru },
-                  kz: { ansible_host: .kz },
-                  eu: { ansible_host: .eu }
-                },
-                vars: {
-                  ansible_user: "ansible",
-                  ansible_ssh_private_key_file: "~/.ssh/id_rsa"
-                }
-              }
-            }
-          ' > inventory.yml
-
-      - name: Check inventory.yml
-        run: cat inventory.yml
 
       - name: Run playbook
         run: |
