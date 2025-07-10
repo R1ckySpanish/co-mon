@@ -1,13 +1,31 @@
 name: CI
 on:
   push:
-
   workflow_dispatch:
   
 jobs:
   deploy:
-    runs-on: R1ckySpanish/ansible
+    runs-on: ubuntu-latest   
+     
     steps:
-    
-      - name: run deploy
-        run: ansible-playbook -i inventory.yml all --private-key $SSH_KEY playbook.yml -b
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.yml playbook.yml -b
