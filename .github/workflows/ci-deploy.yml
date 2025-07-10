@@ -6,8 +6,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-#    env:
-#      HOSTS_JSON: ${{ vars.HOSTS_JSON }}
+    env:
+      HOSTS_JSON: ${{ vars.HOSTS_JSON }}
 
     
     steps:
@@ -33,6 +33,7 @@ jobs:
 
       - name: Run playbook
         run: |
+          ansible-inventory -i inventory -e "HOSTS_JSON=$HOSTS_JSON" --list
           cat inventory.yml
           ansible-playbook -i inventory.yml playbook.yml  # -e "HOSTS_JSON=$HOSTS_JSON"
           eval "$(ssh-agent -k)"
