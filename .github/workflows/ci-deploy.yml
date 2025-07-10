@@ -33,5 +33,5 @@ jobs:
           pwd
           ls -la
           cat inventory.yml
-          ansible-playbook all -i inventory.yml  -e "vars.HOSTS"  playbook.yml
+          ansible-playbook -i inventory.yml playbook.yml -e "HOSTS=some_value"
           eval "${(ssh-agent -k)}"
