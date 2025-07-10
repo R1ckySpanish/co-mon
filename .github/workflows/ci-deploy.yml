@@ -6,6 +6,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      HOSTS_JSON: ${{ vars.HOSTS_JSON }}
 
     
     steps:
