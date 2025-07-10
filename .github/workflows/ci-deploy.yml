@@ -6,7 +6,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest   
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> 2e02d42944e4c77d266dd4a110e754e604804d15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,4 +32,8 @@ jobs:
 
       - name: Run Ansible Playbook
         run: |
+<<<<<<< HEAD
           ansible-playbook -i inventory.yml playbook.yml
+=======
+          ansible-playbook -i inventory.yml playbook.yml -b
+>>>>>>> 2e02d42944e4c77d266dd4a110e754e604804d15

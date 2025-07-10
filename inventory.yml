@@ -8,20 +8,36 @@ all:
     vps:
       hosts:
         ru:
+<<<<<<< HEAD
           ansible_host: {{ RU }}
         kz:
           ansible_host: {{ KZ }}
         eu:
           ansible_host: {{ EU }}
+=======
+          ansible_host: ${RU}
+        kz:
+          ansible_host: ${KZ}
+        eu:
+          ansible_host: ${EU}
+>>>>>>> 2e02d42944e4c77d266dd4a110e754e604804d15
 
     main_node:
       hosts:
         ru:
+<<<<<<< HEAD
           ansible_host: {{ RU }}
+=======
+          ansible_host: ${RU}
+>>>>>>> 2e02d42944e4c77d266dd4a110e754e604804d15
        
        
     vm_agent:
       hosts:
         kz:
+<<<<<<< HEAD
           ansible_host: {{ KZ }}
+=======
+          ansible_host: ${KZ}
+>>>>>>> 2e02d42944e4c77d266dd4a110e754e604804d15
         
