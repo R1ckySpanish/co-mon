@@ -38,3 +38,8 @@ jobs:
           EU_IP=$(echo $HOSTS | jq -r '.eu')
 
           cat <<EOF > inventory.yml
+
+      - name: check inventory.yml
+        run: |
+          pwd
+          cat inventory.yml
