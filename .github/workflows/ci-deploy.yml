@@ -33,6 +33,6 @@ jobs:
 
       - name: Run playbook
         run: |
-          cat inventory-dev.yml
-          ansible-playbook -i inventory-dev.yml playbook.yml -e "HOSTS_JSON=some_value"
+          cat inventory.yml
+          ansible-playbook -i inventory-dev.yml playbook.yml -e "HOSTS_JSON=$HOSTS_JSON"
           eval "${(ssh-agent -k)}"
