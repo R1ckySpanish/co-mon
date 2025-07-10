@@ -1,3 +1,8 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -27,8 +32,37 @@ jobs:
 
       - name: Parse HOSTS and generate inventory.yml
         run: |
-          RU_IP=$(echo ${HOSTS} | jq -r '.ru')
-          KZ_IP=$(echo ${HOSTS} | jq -r '.kz')
-          EU_IP=$(echo ${HOSTS} | jq -r '.eu')
+          RU_IP=$(echo $HOSTS | jq -r '.ru')
+          KZ_IP=$(echo $HOSTS | jq -r '.kz')
+          EU_IP=$(echo $HOSTS | jq -r '.eu')
 
           cat <<EOF > inventory.yml
+all:
+  vars:
+    ansible_user: ansible
+    ansible_ssh_private_key_file: /home/ansible/.ssh/ansible.key
+
+  children:
+    vps:
+      hosts:
+        ru:
+          ansible_host: $RU_IP
+        kz:
+          ansible_host: $KZ_IP
+        eu:
+          ansible_host: $EU_IP
+
+    main_node:
+      hosts:
+        ru:
+          ansible_host: $RU_IP
+
+    vm_agent:
+      hosts:
+        kz:
+          ansible_host: $KZ_IP
+EOF
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.yml playbook.yml
