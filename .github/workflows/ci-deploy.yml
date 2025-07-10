@@ -33,9 +33,9 @@ jobs:
 
       - name: Parse HOSTS and generate inventory.yml
         run: |
-          RU_IP=$(echo $HOSTS | jq -r '.ru')
-          KZ_IP=$(echo $HOSTS | jq -r '.kz')
-          EU_IP=$(echo $HOSTS | jq -r '.eu')
+          RU_IP=${HOSTS["ru"]}
+          KZ_IP=${HOSTS["kz"]}
+          EU_IP=${HOSTS["eu"]}
 
           cat <<EOF > inventory.yml
 
