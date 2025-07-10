@@ -37,7 +37,7 @@ jobs:
           KZ_IP=${HOSTS["kz"]}
           EU_IP=${HOSTS["eu"]}
 
-          cat <<EOF > inventory.yml
+          cat <<'EOF' > inventory.yml
 
       - name: check inventory.yml
         run: |
