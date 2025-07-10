@@ -8,21 +8,21 @@ all:
     vps:
       hosts:
         ru:
-          ansible_host: "${{ RU }}"
+          ansible_host: ${{ RU }}
         kz:
-          ansible_host: "${{ KZ }}"
+          ansible_host: ${{ KZ }}
         eu:
-          ansible_host: "${{ EU }}"
+          ansible_host: ${{ EU }}
           
     main_node:
       hosts:
         ru:
-          ansible_host: "${{ RU }}"
+          ansible_host: ${{ RU }}
 
        
     vm_agent:
       hosts:
         kz:
-          ansible_host: "${{ KZ }}"
+          ansible_host: ${{ KZ }}
 
         
