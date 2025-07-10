@@ -1,0 +1,14 @@
+name: CI
+on:
+  push:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ansible
+    steps:
+    
+      - name: run deploy
+        run: ansible-playbook -i inventory.yml all --private-key $SSH_KEY playbook.yml -b
