@@ -24,19 +24,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible
 
-      - name: make inventory-dev.yml
+      - name: Generate inventory-dev.yml
         run: |
-          cat > inventory-dev.yml <<EOF
-          all:
-            hosts:
-              ru:
-                ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
-              kz:
-                ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
-              eu:
-                ansible_host: $(echo "$HOSTS_JSON" | jq -r .eu)
-          EOF    
-
+          ru_ip=$(echo "$HOSTS_JSON" | jq -r .ru)
+          kz_ip=$(echo "$HOSTS_JSON" | jq -r .kz)
+          eu_ip=$(echo "$HOSTS_JSON" | jq -r .eu)
+          
+          cat <<EOF > inventory-dev.yml
+    
+        all:
+          hosts:
+            ru:
+              ansible_host: $ru_ip
+            kz:
+              ansible_host: $kz_ip
+            eu:
+              ansible_host: $eu_ip
+        EOF
 
           
 
