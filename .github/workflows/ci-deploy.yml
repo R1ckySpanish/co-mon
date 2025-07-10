@@ -33,5 +33,5 @@ jobs:
           pwd
           ls -la
           cat inventory.yml
-          ansible-playbook all -i inventory.yml  -e "vars.HOSTS"  playbook.yml -o StrictHostKeyChecking=no
+          ansible-playbook all -i inventory.yml  -e "vars.HOSTS"  playbook.yml
           eval "${(ssh-agent -k)}"
