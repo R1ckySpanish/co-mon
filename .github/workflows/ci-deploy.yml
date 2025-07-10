@@ -39,8 +39,7 @@ jobs:
             kz:
               ansible_host: $kz_ip
             eu:
-              ansible_host: $eu_ip
-        EOF
+              ansible_host: $eu_ip EOF
 
           
 
