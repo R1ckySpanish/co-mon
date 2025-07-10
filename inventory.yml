@@ -4,27 +4,29 @@ all:
     ansible_ssh_private_key_file: /home/ansible/.ssh/ansible.key
     env:
       HOSTS_JSON: ${{ vars.HOSTS_JSON }}
-    
+    ru_ip: $(echo "$HOSTS_JSON" | jq -r .ru)
+    kz_ip: $(echo "$HOSTS_JSON" | jq -r .kz)
+    eu_ip: $(echo "$HOSTS_JSON" | jq -r .eu)
     
   children:
     vps:
       hosts:
         ru:
-          ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
+          ansible_host: $ru_ip
         kz:
-          ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
+          ansible_host: $kz_ip
         eu:
-          ansible_host: $(echo "$HOSTS_JSON" | jq -r .eu)
+          ansible_host: $eu_ip
           
     main_node:
       hosts:
         ru:
-          ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
+          ansible_host: $ru_ip
 
        
     vm_agent:
       hosts:
         kz:
-          ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
+          ansible_host: $kz_ip
 
         
