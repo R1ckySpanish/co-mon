@@ -3,28 +3,28 @@ all:
     ansible_user: ansible
     ansible_ssh_private_key_file: /home/ansible/.ssh/ansible.key
     env:
-      HOSTS: ${{ vars.HOSTS }}
+      HOSTS: ${{ vars.HOSTS_JSON }}
     
     
   children:
     vps:
       hosts:
         ru:
-          ansible_host: ${ HOSTS["ru"] }
+          ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
         kz:
-          ansible_host: ${ HOSTS["kz"] }
+          ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
         eu:
-          ansible_host: ${ HOSTS["eu"] }
+          ansible_host: $(echo "$HOSTS_JSON" | jq -r .eu)
           
     main_node:
       hosts:
         ru:
-          ansible_host: ${ HOSTS["ru"] }
+          ansible_host: $(echo "$HOSTS_JSON" | jq -r .ru)
 
        
     vm_agent:
       hosts:
         kz:
-          ansible_host: ${ HOSTS["kz"] }
+          ansible_host: $(echo "$HOSTS_JSON" | jq -r .kz)
 
         
