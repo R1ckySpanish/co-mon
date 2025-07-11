@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HOSTS_JSON: ${{ vars.HOSTS_JSON }}
+      RU: $RU
+      EU: $EU
+      KZ: $KZ
 
     
     steps:
@@ -33,7 +36,7 @@ jobs:
 
       - name: Run playbook
         run: |
-          ansible-inventory -i inventory -e "ANSIBLE_INVENTORY_USE_EXTRA_VARS=$HOSTS_JSON" --list
+          ansible-inventory -i inventory -e "RU=$RU" -e "EU=$EU" -e "KZ=$KZ" --list
           cat inventory.yml
           ansible-playbook -i inventory.yml playbook.yml  # -e "HOSTS_JSON=$HOSTS_JSON"
           eval "$(ssh-agent -k)"
