@@ -12,21 +12,21 @@ all:
     vps:
       hosts:
         ru:
-          ansible_host: $ru_ip
+          ansible_host: $RU
         kz:
-          ansible_host: $kz_ip
+          ansible_host: $KZ
         eu:
-          ansible_host: $eu_ip
+          ansible_host: $EU
           
     main_node:
       hosts:
         ru:
-          ansible_host: $ru_ip
+          ansible_host: $RU
 
        
     vm_agent:
       hosts:
         kz:
-          ansible_host: $kz_ip
+          ansible_host: $KZ
 
         
