@@ -6,12 +6,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      HOSTS_JSON: ${{ vars.HOSTS_JSON }}
-      RU: ${{ vars.RU }}
-      EU: ${{ vars.EU }}
-      KZ: ${{ vars.KZ }}
-
     
     steps:
       - name: Checkout
@@ -36,7 +30,5 @@ jobs:
 
       - name: Run playbook
         run: |
-          ansible-inventory -i inventory -e "RU=$RU" -e "EU=$EU" -e "KZ=$KZ" --list
-          cat inventory.yml
-          ansible-playbook -i inventory.yml playbook.yml  # -e "HOSTS_JSON=$HOSTS_JSON"
+          ansible-playbook -i inventory.yml playbook.yml
           eval "$(ssh-agent -k)"
