@@ -33,7 +33,7 @@ jobs:
 
       - name: Run playbook
         run: |
-          ansible-inventory -i inventory -e "HOSTS_JSON=$HOSTS_JSON" --list
+          ansible-inventory -i inventory -e "ANSIBLE_INVENTORY_USE_EXTRA_VARS=$HOSTS_JSON" --list
           cat inventory.yml
           ansible-playbook -i inventory.yml playbook.yml  # -e "HOSTS_JSON=$HOSTS_JSON"
           eval "$(ssh-agent -k)"
