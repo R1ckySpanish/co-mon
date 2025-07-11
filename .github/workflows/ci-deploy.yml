@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HOSTS_JSON: ${{ vars.HOSTS_JSON }}
-      RU: $RU
-      EU: $EU
-      KZ: $KZ
+      RU: ${{ vars.$RU }}
+      EU: ${{ vars.$EU }}
+      KZ: ${{ vars.$KZ }}
 
     
     steps:
