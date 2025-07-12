@@ -39,7 +39,11 @@ scrape_configs:
           app: vmagent
       
 
-          
+  - job_name: 'windows_exporter'
+    static_configs:
+      - targets: [ '192.168.56.1:9182/metrics' ]
+        labels:
+          app: vmagent          
           
 
 #  - job_name: 'vlagent'
