@@ -1,0 +1,38 @@
+[api]
+enabled = true
+
+
+[sources.host_metrics]
+type = "host_metrics"
+scrape_interval_secs = 15
+namespace = "node"
+
+[sources.vector_logs]
+type = "internal_logs"
+pid_key = "pid"
+host_key = "host"
+
+[sources.vector_metrics]
+type = "internal_metrics"
+
+
+[sinks.output]
+type = "prometheus_exporter"
+inputs = [ "host_metrics", "vector_metrics" ]
+address = "0.0.0.0:9598"
+
+[sinks.dev_null]
+type = "blackhole"
+inputs = [ "vector_logs" ]
+print_interval_secs = 10
+
+#[sinks.victoria]
+#type = "prometheus_remote_write"
+#inputs = [ "add_tags" ]
+#endpoint = "http://<node_addr>:9598/api/v1/write"
+#healthcheck = true
+
+
+
+
+

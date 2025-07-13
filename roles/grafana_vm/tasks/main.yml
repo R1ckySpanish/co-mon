@@ -1,0 +1,50 @@
+- name: Create project directory
+  file:
+    path: $GF_DIR
+    state: directory
+
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: $GF_DIR/docker-compose.yml
+    mode: '0644'
+    
+- name: Copy victoria_metrics.yml
+  copy:
+    src: ./provisioning/datasources/victoria_metrics.yml
+    dest: $GF_DIR/victoria_metrics.yml
+    mode: '0644'
+
+- name: Copy grafana.ini
+  copy:
+    src: ./files/grafana.ini
+    dest: $GF_DIR/grafana.ini
+    mode: '0644'
+   
+- name: Create certs dir
+  file:
+    path: /etc/grafana/certs
+    state: directory
+    
+- name: Copy grafana.crt
+  copy:
+    src: ./ssl/grafana.crt
+    dest: /etc/grafana/certs/grafana.crt
+    mode: '0600'
+
+- name: Copy .grafana.key
+  copy:
+    src: ./ssl/grafana.key
+    dest: /etc/grafana/certs/grafana.key
+    mode: '0600'
+
+- name: Copy .env
+  copy:
+    src: .env
+    dest: $GF_DIR/.env
+    mode: '0600'
+
+- name: Launch stack
+  shell: docker compose up -d
+  args:
+    chdir: $GF_DIR

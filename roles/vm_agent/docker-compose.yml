@@ -1,0 +1,22 @@
+services:
+  vmagent:
+    image: victoriametrics/vmagent:latest
+    container_name: vm_agent
+    ports:
+      - '8429:8429'
+    volumes:
+      - 'vmagent_data:/vmagent_data'
+      - './promscrape.yml:/opt/vm_agent/promscrape.yml:ro'
+      - './host_metrics_targets.json:/opt/vm_agent/host_metrics_targets.json:ro'
+    command:
+      - '-promscrape.config=/opt/vm_agent/promscrape.yml'
+      - '-remoteWrite.url=${VM_REMOTEWRITE_URL}'
+    restart: always
+    extra_hosts:
+      - "ru:${RU_VPS_IP}"
+      - "kz:${KZ_VPS_IP}"
+      - "eu:${EU_VPS_IP}"
+      
+      
+volumes:
+  vmagent_data: {}
