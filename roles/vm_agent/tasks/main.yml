@@ -25,19 +25,19 @@
 - name: Copy .env
   copy:
     src: .env
-    dest: $VM_AGENT_DIR.env
+    dest: $VM_AGENT_DIR/.env
     mode: '0600'
 
 - name: Encrypt .env
   shell: |
-    dotenvx run -f .env -- python3 index.py
-    dotenvx set HELLO "public (enc)" -f .env
+    dotenvx encrypt .env
+  chdir: $VM_AGENT_DIR  
     
 - name: Launch vm_agent
   shell: docker compose up -d
   args:
     chdir: $VM_AGENT_DIR
     env:
-      GF_SECURITY_ADMIN_USER=echo 'import os;print(os.getenv("GF_SECURITY_ADMIN_USER, ""))' > index.py'
-      GF_SECURITY_ADMIN_PASSWORD=echo 'import os;print(os.getenv("GF_SECURITY_ADMIN_PASSWORD, ""))' > index.py'
+      GF_SECURITY_ADMIN_USER=dotenvx get GF_SECURITY_ADMIN_USER
+      GF_SECURITY_ADMIN_PASSWORD=dotenvx get GF_SECURITY_ADMIN_PASSWORD
       GF_DIR=/opt/grafana
