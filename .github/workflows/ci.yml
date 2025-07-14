@@ -37,6 +37,7 @@ jobs:
 
       - name: Run playbook
         run: |
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           sudo find / -iname "*playbook.yml"
           ls -l playbook.yml
           ansible-playbook -i inventory.yml playbook.yml
