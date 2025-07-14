@@ -35,6 +35,6 @@ jobs:
 
       - name: Run playbook
         run: |
-          ansible-playbook -i inventory.yml playbook.yml
+          ansible-playbook -i inventory.yml playbook.yml -e ANSIBLE_HOST_KEY_CHECKING=False
           eval "$(ssh-agent -k)"
 
