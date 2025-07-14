@@ -23,18 +23,18 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/ansible.key
-          chmod 600 ~/.ssh/ansible.key
+          chmod 400 ~/.ssh/ansible.key
           
 
       - name: Add SSH key
         run: |
-          pwd
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
 
 
       - name: Run playbook
         run: |
-          pwd
-          ansible-playbook -i inventory.yml playbook.yml
+          args:
+          ansible all  -i inventory.yml -m setup
+          ansible-playbook all -i inventory.yml  playbook.yml
           eval "$(ssh-agent -k)"
