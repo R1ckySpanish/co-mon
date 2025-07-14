@@ -28,11 +28,13 @@ jobs:
 
       - name: Add SSH key
         run: |
+          pwd
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
 
 
       - name: Run playbook
         run: |
+          pwd
           ansible-playbook -i inventory.yml playbook.yml
           eval "$(ssh-agent -k)"
