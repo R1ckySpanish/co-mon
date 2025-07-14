@@ -1,8 +1,0 @@
-[
-  {
-    "targets": ["grafan:9598", "monty-mon:9598"],
-    "labels": {
-      "app": "vector"
-    }
-  }
-]

@@ -3,18 +3,24 @@
   file:
     path: "{{ VM_AGENT_DIR }}"
     state: directory
+    
+- name: Copy targets_host-metrics.json
+  copy:
+    src: "{{ VM_AGENT_DIR }}/files/targets_host-metrics.json"
+    dest: "{{ VM_AGENT_DIR }}/targets_host-metrics.json"
+    mode: '0600'
+
+- name: Copy targets_host-metrics.json
+  copy:
+    src: "{{ VM_AGENT_DIR }}/files/targets_cadvisor.json"
+    dest: "{{ VM_AGENT_DIR }}/targets_cadvisor.json"
+    mode: '0600'
 
 - name: Upload promscrape.yml
   ansible.builtin.template:
     src: ./templates/promscrape.yml.j2
-    dest: "{{ VM_AGENT_DIR }}//promscrape.yml"
+    dest: "{{ VM_AGENT_DIR }}/promscrape.yml"
     mode: '0644'
-    
-- name: Upload host_metrics_targets.json
-  ansible.builtin.template:
-    src: ./templates/host_metrics_targets.json.j2
-    dest: "{{ VM_AGENT_DIR }}/host_metrics_targets.json"
-    mode: '0644'  
 
 - name: Copy docker-compose.yml
   copy:

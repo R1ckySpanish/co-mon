@@ -9,8 +9,13 @@ scrape_configs:
   - job_name: 'host_metrics'
     file_sd_configs:
       - files:
-        - host_metrics_targets.json
-       
+        - files/targets_host-metrics.json
+
+  - job_name: 'cAdvisor'
+    static_configs:
+    file_sd_configs:
+      - files:
+        - files/targets_cadvisor.json     
         
   - job_name: 'victoria_metrics'
     static_configs:
@@ -35,6 +40,8 @@ scrape_configs:
       - targets: [ '${LAPTOP_X}:9182' ]
         labels:
           app: vmagent
+
+
           
           
 

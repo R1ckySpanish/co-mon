@@ -40,7 +40,7 @@
     mode: '0644'
 
 - name: Start cAdvisor service
-  docker_compose:
+  docker_compose_v2:
     project_src: "{{ playbook_dir }}/common"
     files:
       - docker-compose.yml
