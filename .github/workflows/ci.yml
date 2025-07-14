@@ -37,6 +37,8 @@ jobs:
 
       - name: Run playbook
         run: |
+          pwd
+          ls -l playbook.yml
           ansible-playbook -i inventory.yml playbook.yml
           eval "$(ssh-agent -k)"
 
