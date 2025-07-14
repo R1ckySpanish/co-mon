@@ -1,5 +1,5 @@
 # python
-name: build
+name: CI pipeline
 on: push
 jobs:
   build:
@@ -13,25 +13,25 @@ jobs:
       env:
         DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install Ansible
-        run: |
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+    - name: Install Ansible
+      run: |
           python -m pip install --upgrade pip
           pip install ansible
 
-      - name: Set up SSH key
-        run: |
+    - name: Set up SSH key
+      run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/ansible.key
           chmod 600 ~/.ssh/ansible.key
           
-      - name: Run playbook
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: 'False'
-        run: |
+    - name: Run playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: 'False'
+      run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
           ansible-playbook -i inventory.yml playbook.yml -vv
