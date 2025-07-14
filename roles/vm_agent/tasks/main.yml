@@ -30,7 +30,8 @@
 
 - name: Encrypt .env
   shell: dotenvx encrypt .env
-  chdir: "{{ VM_AGENT_DIR }}"
+  args:
+    chdir: "{{ VM_AGENT_DIR }}"
 
 - name: Decrypt .env
   shell: dotenvx decrypt .env.encrypted
