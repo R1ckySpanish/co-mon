@@ -34,7 +34,6 @@ jobs:
 
       - name: Run playbook
         run: |
-          args:
           ansible all  -i inventory.yml -m setup
           ansible-playbook all -i inventory.yml  playbook.yml
           eval "$(ssh-agent -k)"
