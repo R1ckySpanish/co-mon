@@ -38,10 +38,10 @@ jobs:
       - name: Run playbook
         run: |
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          env
-          ls -la */*/*
-          sudo find / -iname "*playbook.yml"
-          ls -l playbook.yml
+          whoami
+          ls -la *
+#          sudo find / -iname "*playbook.yml"
+#          ls -l playbook.yml
           ansible-playbook -i inventory.yml playbook.yml
           eval "$(ssh-agent -k)"
 
