@@ -12,15 +12,16 @@ jobs:
     - run: curl -sfS https://dotenvx.sh/install.sh | sh
       env:
         DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
+
   deploy:
     runs-on: ubuntu-latest
-    
     steps:
+      - uses: actions/checkout@v3
+
       - name: Install Ansible
         run: |
           python -m pip install --upgrade pip
           pip install ansible
-
 
       - name: Set up SSH key
         run: |
@@ -28,20 +29,12 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/ansible.key
           chmod 600 ~/.ssh/ansible.key
           
-
       - name: Add SSH key
         run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
 
-
       - name: Run playbook
         run: |
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          whoami
-          ls -la *
-#          sudo find / -iname "*playbook.yml"
-#          ls -l playbook.yml
           ansible-playbook -i inventory.yml playbook.yml
           eval "$(ssh-agent -k)"
-
