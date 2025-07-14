@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           env
-          ls -la /*/*/*/*
+          ls -la /*/*
           sudo find / -iname "*playbook.yml"
           ls -l playbook.yml
           ansible-playbook -i inventory.yml playbook.yml
