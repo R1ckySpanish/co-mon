@@ -7,37 +7,56 @@
 - name: Upload promscrape.yml
   ansible.builtin.template:
     src: ./templates/promscrape.yml.j2
-    dest: $VM_AGENT_DIR/promscrape.yml
+    dest: "{{ VM_AGENT_DIR }}//promscrape.yml"
     mode: '0644'
     
 - name: Upload host_metrics_targets.json
   ansible.builtin.template:
     src: ./templates/host_metrics_targets.json.j2
-    dest: $VM_AGENT_DIR/host_metrics_targets.json
+    dest: "{{ VM_AGENT_DIR }}/host_metrics_targets.json"
     mode: '0644'  
 
 - name: Copy docker-compose.yml
   copy:
     src: docker-compose.yml
-    dest: $VM_AGENT_DIR/docker-compose.yml
+    dest: "{{ VM_AGENT_DIR }}/docker-compose.yml"
     mode: '0644'    
     
 - name: Copy .env
   copy:
     src: .env
-    dest: $VM_AGENT_DIR/.env
+    dest: "{{ VM_AGENT_DIR }}/.env"
     mode: '0600'
 
 - name: Encrypt .env
-  shell: |
-    dotenvx encrypt .env
-  chdir: $VM_AGENT_DIR  
+  shell: dotenvx encrypt .env
+  chdir: "{{ VM_AGENT_DIR }}"
+
+- name: Decrypt .env
+  shell: dotenvx decrypt .env.encrypted
+  args:
+    chdir: "{{ VM_AGENT_DIR }}"
+  environment:
+    DOTENV_PRIVATE_KEY_CI: "{{ lookup('env', 'DOTENV_PRIVATE_KEY_CI') }}"
     
+- name: Read GF_SECURITY_ADMIN_USER from .env
+  command: dotenvx get GF_SECURITY_ADMIN_USER
+  args:
+    chdir: "{{ VM_AGENT_DIR }}"
+  register: gf_user
+
+- name: Read GF_SECURITY_ADMIN_PASSWORD from .env
+  command: dotenvx get GF_SECURITY_ADMIN_PASSWORD
+  args:
+    chdir: "{{ VM_AGENT_DIR }}"
+  register: gf_pass
+
+
 - name: Launch vm_agent
   shell: docker compose up -d
   args:
     chdir: $VM_AGENT_DIR
     env:
-      GF_SECURITY_ADMIN_USER=dotenvx get GF_SECURITY_ADMIN_USER
-      GF_SECURITY_ADMIN_PASSWORD=dotenvx get GF_SECURITY_ADMIN_PASSWORD
+      GF_SECURITY_ADMIN_USER="{{ gf_user.stdout }}"
+      GF_SECURITY_ADMIN_PASSWORD="{{ gf_pass.stdout }}"
       GF_DIR=/opt/grafana
