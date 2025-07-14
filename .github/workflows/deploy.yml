@@ -1,4 +1,4 @@
-name: CI
+name: deploy
 on:
   push
 
@@ -34,5 +34,5 @@ jobs:
 
       - name: Run playbook
         run: |
-          ansible-playbook -i inventory.yml --limit vm_agent playbook.yml -b --key-file ~/.ssh/ansible.key
+          ansible-playbook -i inventory.yml playbook.yml -b --key-file ~/.ssh/ansible.key
           eval "$(ssh-agent -k)"
