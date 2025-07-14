@@ -1,7 +1,7 @@
 
 - name: Create project directory
   file:
-    path: $VM_AGENT_DIR
+    path: "{{ VM_AGENT_DIR }}"
     state: directory
 
 - name: Upload promscrape.yml
@@ -55,7 +55,7 @@
 - name: Launch vm_agent
   shell: docker compose up -d
   args:
-    chdir: $VM_AGENT_DIR
+    chdir: "{{ VM_AGENT_DIR }}"
     env:
       GF_SECURITY_ADMIN_USER="{{ gf_user.stdout }}"
       GF_SECURITY_ADMIN_PASSWORD="{{ gf_pass.stdout }}"
