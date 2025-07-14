@@ -33,15 +33,17 @@
     state: present
     update_cache: yes
 
-- name: Install cAdvisor
-  shell: |
-    VERSION=v0.35.0
-    sudo docker run \
-    --volume=/:/rootfs:ro \
-    --volume=/var/run:/var/run:rw \
-    --volume=/sys:/sys:ro \
-    --volume=/var/lib/docker/:/var/lib/docker:ro \
-    --publish=8080:8080 \
-    --detach=true \
-    --name=cadvisor \
-    gcr.io/cadvisor/cadvisor:$VERSION
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: docker-compose.yml
+    mode: '0644'
+
+- name: Start cAdvisor service
+  docker_compose:
+    project_src: "{{ playbook_dir }}/common"
+    files:
+      - docker-compose.yml
+    restarted: true
+    state: present
+    pull: true
