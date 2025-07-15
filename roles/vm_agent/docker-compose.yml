@@ -6,17 +6,17 @@ services:
       - '8429:8429'
     volumes:
       - 'vmagent_data:/vmagent_data'
-      - "./promscrape.yml:${VM_AGENT_DIR}/promscrape.yml:ro"
-      - "./files/targets_cadvisor.json:${VM_AGENT_DIR}/targets_cadvisor.json:ro"
-      - "./files/targets_host-metrics.json:${VM_AGENT_DIR}/targets_host-metrics.json:ro"
+      - "./files/targets_cadvisor.json:/opt/vm_agent/targets_cadvisor.json:ro"
+      - "./files/targets_host-metrics.json:/opt/vm_agent/targets_host-metrics.json:ro"
+      - "./promscrape.yml:/opt/vm_agent/promscrape.yml:ro"
     command:
-      - "-promscrape.config=${VM_AGENT_DIR}/promscrape.yml"
-      - '-remoteWrite.url=${VM_REMOTEWRITE_URL}'
+      - "-promscrape.config=/opt/vm_agent/promscrape.yml"
+      - '-remoteWrite.url=http://217.171.146.251:8428/api/v1/write'
     restart: always
     extra_hosts:
-      - "ru:${RU_VPS_IP}"
-      - "kz:${KZ_VPS_IP}"
-      - "eu:${EU_VPS_IP}"
+      - 'ru: 217.171.146.251'
+      - 'kz: 38.180.207.69'
+      - 'eu: 51.38.152.67'
       
       
 volumes:
