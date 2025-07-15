@@ -37,11 +37,6 @@
     dest: "{{ VM_AGENT_DIR }}/.env"
     mode: '0600'
 
-- name: Encrypt .env
-  shell: dotenvx encrypt .env
-  args:
-    chdir: "{{ VM_AGENT_DIR }}"
-
 - name: Launch vm_agent
   command: docker compose up -d
   args:
