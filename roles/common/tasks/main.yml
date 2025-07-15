@@ -36,7 +36,7 @@
 - name: Install Dotenvx
   shell: curl -sfS https://dotenvx.sh/install.sh | sh
   args:
-    create: /usr/local/bin/dotenvx
+    creates: /usr/local/bin/dotenvx
 
 
 - name: Copy docker-compose.yml
