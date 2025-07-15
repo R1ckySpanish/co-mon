@@ -1,3 +1,6 @@
+- name: set GF_DIR
+  ansible.builtin.set_fact:
+    VM_AGENT_DIR: /opt/vm_agent
 
 - name: Create project directory
   file:
