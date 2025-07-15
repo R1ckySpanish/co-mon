@@ -14,9 +14,9 @@ services:
       - '-remoteWrite.url=http://217.171.146.251:8428/api/v1/write'
     restart: always
     extra_hosts:
-      - "ru: 217.171.146.251"
-      - "kz: 38.180.207.69"
-      - "eu: 51.38.152.67"
+      - "ru": "217.171.146.251"
+      - "kz": "38.180.207.69"
+      - "eu": "51.38.152.67"
       
       
 volumes:
