@@ -30,12 +30,6 @@
     dest: "{{ VM_AGENT_DIR }}/docker-compose.yml"
     mode: '0644'    
     
-- name: Copy .env
-  copy:
-    src: .env
-    dest: "{{ VM_AGENT_DIR }}/.env"
-    mode: '0600'
-
 - name: Launch vm_agent
   command: docker compose up -d
   args:
