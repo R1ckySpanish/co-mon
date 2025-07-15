@@ -6,9 +6,9 @@ services:
       - '8429:8429'
     volumes:
       - 'vmagent_data:/vmagent_data'
-      - "./files/targets_cadvisor.json:./cadvisor.json"
-      - "./files/targets_host-metrics.json:./host-metrics.json"
-      - "./promscrape.yml:/promscrape.yml"
+      - './targets_cadvisor.json:/cadvisor.json'
+      - './targets_host-metrics.json:/host-metrics.json'
+      - './promscrape.yml:/promscrape.yml'
     command:
       - '-promscrape.config=promscrape.yml'
       - '-remoteWrite.url=http://ru:8428/api/v1/write'
