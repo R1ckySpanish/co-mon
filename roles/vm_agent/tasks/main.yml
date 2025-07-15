@@ -65,7 +65,7 @@
 
 
 - name: Launch vm_agent
-  shell: docker compose up -d
+  command: docker compose up -d
   env:
       GF_SECURITY_ADMIN_USER="{{ gf_user.stdout }}"
       GF_SECURITY_ADMIN_PASSWORD="{{ gf_pass.stdout }}"
