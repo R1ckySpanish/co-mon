@@ -34,5 +34,5 @@ jobs:
       run: |
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-          ansible-playbook -i inventory.yml playbook.yml -vv
+          ansible-playbook -i inventory.yml playbook.yml -M vm_agent -vv
           eval "$(ssh-agent -k)"

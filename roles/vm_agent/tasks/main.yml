@@ -42,15 +42,17 @@
   args:
     chdir: "{{ VM_AGENT_DIR }}"
 
-- name: Decrypt .env
-  shell: dotenvx decrypt .env.encrypted
-  args:
-    chdir: "{{ VM_AGENT_DIR }}"
-  environment:
-    DOTENV_PRIVATE_KEY_CI: "{{ lookup('env', 'DOTENV_PRIVATE_KEY_CI') }}"
+# - name: Decrypt .env
+#   shell: dotenvx decrypt .env
+#   args:
+#     chdir: "{{ VM_AGENT_DIR }}"
+#   env:
+#     DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
     
 - name: Read GF_SECURITY_ADMIN_USER from .env
   command: dotenvx get GF_SECURITY_ADMIN_USER
+  env:
+    DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
   args:
     chdir: "{{ VM_AGENT_DIR }}"
   register: gf_user
