@@ -1,5 +1,7 @@
 services:
   vmagent:
+    environment:
+      - VM_AGENT_DIR=/opt/vm_agent
     image: victoriametrics/vmagent:latest
     container_name: vm_agent
     ports:
