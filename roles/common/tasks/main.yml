@@ -39,11 +39,7 @@
     dest: docker-compose.yml
     mode: '0644'
 
-- name: Start cAdvisor service
-  docker_compose_v2:
-    project_src: "{{ playbook_dir }}/common"
-    files:
-      - docker-compose.yml
-    restarted: true
-    state: present
-    pull: true
+- name: Launch stack
+  shell: docker compose up -d
+  args:
+    chdir: "{{ GF_DIR }}"
