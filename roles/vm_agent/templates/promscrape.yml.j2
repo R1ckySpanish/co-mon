@@ -35,14 +35,13 @@ scrape_configs:
         labels:
           app: vmagent
       
-  - job_name: 'windows_exporter'
-    static_configs:
-      - targets: [ '${LAPTOP_X}:9182' ]
-        labels:
-          app: vmagent
+#  - job_name: 'windows_exporter'
+#    static_configs:
+#      - targets: [ '${LAPTOP_X}:9182' ]
+#        labels:
+#          app: vmagent
 
-
-          
+     
           
 
 #  - job_name: 'vlagent'

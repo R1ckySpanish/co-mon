@@ -7,7 +7,8 @@ services:
     volumes:
       - 'vmagent_data:/vmagent_data'
       - './promscrape.yml:/opt/vm_agent/promscrape.yml:ro'
-      - './host_metrics_targets.json:/opt/vm_agent/host_metrics_targets.json:ro'
+      - './files/targets_cadvisor.json:ro'
+      - './files/targets_host-metrics.json:/opt/vm_agent/targets_host-metrics.json:ro'
     command:
       - '-promscrape.config=/opt/vm_agent/promscrape.yml'
       - '-remoteWrite.url=${VM_REMOTEWRITE_URL}'
