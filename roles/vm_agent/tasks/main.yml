@@ -11,11 +11,13 @@
   copy:
     src: ./files/targets_host-metrics.json
     dest: "{{ VM_AGENT_DIR }}/targets_host-metrics.json"
+    follow: no
 
 - name: Copy targets_cadvisor.json
   copy:
     src: "./files/targets_cadvisor.json"
     dest: "{{ VM_AGENT_DIR }}/targets_cadvisor.json"
+    follow: no
 
 
 - name: Upload promscrape.yml
