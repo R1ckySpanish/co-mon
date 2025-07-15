@@ -1,4 +1,3 @@
-# python
 name: ci-pipeline
 on: push
 jobs:
