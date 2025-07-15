@@ -1,3 +1,7 @@
+- name: set GF_DIR
+  ansible.builtin.set_fact:
+    GF_DIR: /opt/grafana_vm
+
 - name: Create project directory
   file:
     path: "{{ GF_DIR }}"
