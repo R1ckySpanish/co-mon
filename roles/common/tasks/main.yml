@@ -33,6 +33,12 @@
     state: present
     update_cache: yes
 
+- name: Install Dotenvx
+  shell: curl -sfS https://dotenvx.sh/install.sh | sh
+  args:
+    create: /usr/local/bin/dotenvx
+
+
 - name: Copy docker-compose.yml
   copy:
     src: docker-compose.yml
