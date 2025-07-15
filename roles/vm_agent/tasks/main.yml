@@ -7,15 +7,15 @@
     path: "{{ VM_AGENT_DIR }}"
     state: directory
     
-- name: Copy targets_host-metrics.json
+- name: Copy host-metrics.json
   copy:
-    src: ./files/targets_host-metrics.json
-    dest: "{{ VM_AGENT_DIR }}/targets_host-metrics.json"
+    src: ./files/host-metrics.json
+    dest: "{{ VM_AGENT_DIR }}/host-metrics.json"
 
-- name: Copy targets_cadvisor.json
+- name: Copy cadvisor.json
   copy:
-    src: "./files/targets_cadvisor.json"
-    dest: "{{ VM_AGENT_DIR }}/targets_cadvisor.json"
+    src: "./files/cadvisor.json"
+    dest: "{{ VM_AGENT_DIR }}/cadvisor.json"
 
 
 - name: Upload promscrape.yml

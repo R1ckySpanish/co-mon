@@ -11,7 +11,7 @@ services:
       - "./promscrape.yml:/promscrape.yml"
     command:
       - '-promscrape.config=promscrape.yml'
-      - '-remoteWrite.url=http://217.171.146.251:8428/api/v1/write'
+      - '-remoteWrite.url=http://ru:8428/api/v1/write'
       - '-promscrape.fileSDCheckInterval=30s'
     restart: always
     extra_hosts:
