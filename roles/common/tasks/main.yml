@@ -41,5 +41,3 @@
 
 - name: Launch stack
   shell: docker compose up -d
-  args:
-    chdir: "{{ GF_DIR }}"
