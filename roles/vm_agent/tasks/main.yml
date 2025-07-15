@@ -11,13 +11,12 @@
   copy:
     src: ./files/targets_host-metrics.json
     dest: "{{ VM_AGENT_DIR }}/targets_host-metrics.json"
-    mode: '0600'
 
-- name: Copy targets_host-metrics.json
+- name: Copy targets_cadvisor.json
   copy:
     src: "./files/targets_cadvisor.json"
     dest: "{{ VM_AGENT_DIR }}/targets_cadvisor.json"
-    mode: '0600'
+
 
 - name: Upload promscrape.yml
   ansible.builtin.template:
