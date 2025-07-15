@@ -55,20 +55,17 @@
     chdir: "{{ VM_AGENT_DIR }}"
   # env:
   #   DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
-  register: gf_user
+  register: GF_SECURITY_ADMIN_USER
 
 - name: Read GF_SECURITY_ADMIN_PASSWORD from .env
   command: dotenvx get GF_SECURITY_ADMIN_PASSWORD
   args:
     chdir: "{{ VM_AGENT_DIR }}"
-  register: gf_pass
+  register: GF_SECURITY_ADMIN_PASSWORD
 
 
 - name: Launch vm_agent
-  command: |
-    export GF_SECURITY_ADMIN_USER="{{ gf_user.stdout }}" 
-    export GF_SECURITY_ADMIN_PASSWORD="{{ gf_pass.stdout }}" 
-    docker compose up -d
+  command: docker compose up -d
   args:
     chdir: "{{ VM_AGENT_DIR }}"
     
