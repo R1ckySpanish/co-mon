@@ -11,6 +11,8 @@
   become: yes
   roles:
     - grafana_vm
+      tags: test
+
 
 - name: Install VM_agent
   hosts: vmagent_nodes

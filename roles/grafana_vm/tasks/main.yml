@@ -48,6 +48,33 @@
     dest: "{{ GF_DIR }}/.env"
     mode: '0600'
 
+- name: Encrypt .env
+  shell: dotenvx encrypt .env
+  args:
+    chdir: "{{ GF_DIR }}"
+
+# - name: Decrypt .env
+#   shell: dotenvx decrypt .env
+#   args:
+#     chdir: "{{ VM_AGENT_DIR }}"
+#   env:
+#     DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
+    
+- name: Read GF_SECURITY_ADMIN_USER from .env
+  command: dotenvx get GF_SECURITY_ADMIN_USER
+  args:
+    chdir: "{{ GF_DIR }}"
+  # env:
+  #   DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
+  register: GF_SECURITY_ADMIN_USER
+
+- name: Read GF_SECURITY_ADMIN_PASSWORD from .env
+  command: dotenvx get GF_SECURITY_ADMIN_PASSWORD
+  args:
+    chdir: "{{ GF_DIR }}"
+  register: GF_SECURITY_ADMIN_PASSWORD
+
+
 - name: Launch stack
   shell: docker compose up -d
   args:
