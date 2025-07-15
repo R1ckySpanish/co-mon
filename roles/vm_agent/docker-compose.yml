@@ -7,10 +7,10 @@ services:
     volumes:
       - 'vmagent_data:/vmagent_data'
       - "./files/targets_cadvisor.json:/targets_cadvisor.json:ro"
-      - "./files/targets_host-metrics.json:/targets_host-metrics.json:ro"
+      - "./files/targets_host-metrics.json:/targets_host-metrics.json"
       - "./promscrape.yml:/promscrape.yml"
     command:
-      - '-promscrape.config=./promscrape.yml'
+      - '-promscrape.config=promscrape.yml'
       - '-remoteWrite.url=http://217.171.146.251:8428/api/v1/write'
       - '-promscrape.fileSDCheckInterval=30s'
     restart: always
