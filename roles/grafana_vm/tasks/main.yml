@@ -61,7 +61,7 @@
 #     DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
     
 - name: Read GF_SECURITY_ADMIN_USER from .env
-  command: dotenvx get -f .env GF_SECURITY_ADMIN_USER
+  shell: dotenvx get -f .env GF_SECURITY_ADMIN_USER
   args:
     chdir: "{{ GF_DIR }}"
   # env:
@@ -69,7 +69,7 @@
   register: GF_SECURITY_ADMIN_USER
 
 - name: Read GF_SECURITY_ADMIN_PASSWORD from .env
-  command: dotenvx get -f .env GF_SECURITY_ADMIN_PASSWORD
+  shell: dotenvx get -f .env GF_SECURITY_ADMIN_PASSWORD
   args:
     chdir: "{{ GF_DIR }}"
   register: GF_SECURITY_ADMIN_PASSWORD
