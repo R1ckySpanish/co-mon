@@ -10,7 +10,7 @@
   hosts: main_node
   become: yes
   roles:
-    - grafana_vm
+    - grafana_vm:
       tags: test
 
 
