@@ -74,7 +74,6 @@
     chdir: "{{ GF_DIR }}"
   register: GF_SECURITY_ADMIN_PASSWORD
 
-
 - name: Launch stack
   shell: docker compose up -d
   args:
