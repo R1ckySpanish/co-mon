@@ -51,10 +51,10 @@
     
 - name: Read GF_SECURITY_ADMIN_USER from .env
   command: dotenvx get GF_SECURITY_ADMIN_USER
-  env:
-    DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
   args:
     chdir: "{{ VM_AGENT_DIR }}"
+  # env:
+  #   DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
   register: gf_user
 
 - name: Read GF_SECURITY_ADMIN_PASSWORD from .env
