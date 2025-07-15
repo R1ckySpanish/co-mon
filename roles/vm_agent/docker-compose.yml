@@ -6,11 +6,11 @@ services:
       - '8429:8429'
     volumes:
       - 'vmagent_data:/vmagent_data'
-      - './promscrape.yml:/opt/vm_agent/promscrape.yml:ro'
-      - './files/targets_cadvisor.json:/opt/vm_agent/targets_cadvisor:ro'
-      - './files/targets_host-metrics.json:/opt/vm_agent/targets_host-metrics.json:ro'
+      - "./promscrape.yml:${VM_AGENT_DIR}/promscrape.yml:ro"
+      - "./files/targets_cadvisor.json:${VM_AGENT_DIR}/targets_cadvisor.json:ro"
+      - "./files/targets_host-metrics.json:${VM_AGENT_DIR}/targets_host-metrics.json:ro"
     command:
-      - '-promscrape.config=/opt/vm_agent/promscrape.yml'
+      - "-promscrape.config=${VM_AGENT_DIR}/promscrape.yml"
       - '-remoteWrite.url=${VM_REMOTEWRITE_URL}'
     restart: always
     extra_hosts:
