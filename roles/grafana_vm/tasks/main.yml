@@ -48,10 +48,10 @@
     dest: "{{ GF_DIR }}/.env"
     mode: '0600'
 
-- name: Encrypt .env
-  shell: dotenvx encrypt .env
-  args:
-    chdir: "{{ GF_DIR }}"
+# - name: Encrypt .env
+#   shell: dotenvx encrypt .env
+#   args:
+#     chdir: "{{ GF_DIR }}"
 
 # - name: Decrypt .env
 #   shell: dotenvx decrypt .env
