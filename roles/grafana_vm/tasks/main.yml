@@ -12,12 +12,6 @@
     src: docker-compose.yml
     dest: "{{ GF_DIR }}/docker-compose.yml"
     mode: '0644'
-    
-- name: Copy victoria_metrics.yml
-  copy:
-    src: ./provisioning/datasources/victoria_metrics.yml
-    dest: "{{ GF_DIR }}/victoria_metrics.yml"
-    mode: '0644'
 
 - name: Ensure group 'grafana' exists
   ansible.builtin.group:
@@ -75,6 +69,12 @@
     owner: grafana
     group: grafana
     mode: '0400'
+
+- name: Copy victoria_metrics.yml
+  copy:
+    src: ./provisioning/datasources/victoria_metrics.yml
+    dest: "{{ GF_DIR }}/victoria_metrics.yml"
+    mode: '0644'
 
 
 - name: Launch stack
