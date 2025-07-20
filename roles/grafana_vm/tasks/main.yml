@@ -24,22 +24,11 @@
     src: ./files/grafana.ini
     dest: "{{ GF_DIR }}/grafana.ini"
     mode: '0644'
-   
-- name: Create certs dir
-  file:
-    path: /etc/grafana/certs
-    state: directory
     
-- name: Copy grafana.crt
+- name: Copy .grafana.crt
   copy:
     src: ./ssl/grafana.crt
-    dest: /etc/grafana/certs/grafana.crt
-    mode: '0600'
-
-- name: Copy .grafana.key
-  copy:
-    src: ./ssl/grafana.key
-    dest: /etc/grafana/certs/grafana.key
+    dest: "{{ GF_DIR }}/grafana.crt"
     mode: '0600'
 
 - name: Copy .env
@@ -47,25 +36,11 @@
     src: .env
     dest: "{{ GF_DIR }}/.env"
     mode: '0600'
-
-# - name: Encrypt .env
-#   shell: dotenvx encrypt .env
-#   args:
-#     chdir: "{{ GF_DIR }}"
-
-# - name: Decrypt .env
-#   shell: dotenvx decrypt .env
-#   args:
-#     chdir: "{{ VM_AGENT_DIR }}"
-#   env:
-#     DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
     
 - name: Read GF_SECURITY_ADMIN_USER from .env
   shell: dotenvx get -f .env | jq .GF_SECURITY_ADMIN_USER
   args:
     chdir: "{{ GF_DIR }}"
-  # env:
-  #   DOTENV_PRIVATE_KEY_CI: "{{ lookup('.env', 'DOTENV_PRIVATE_KEY_CI') }}"
   register: GF_SECURITY_ADMIN_USER
 
 - name: Read GF_SECURITY_ADMIN_PASSWORD from .env
@@ -74,7 +49,28 @@
     chdir: "{{ GF_DIR }}"
   register: GF_SECURITY_ADMIN_PASSWORD
 
+- name: Make grafana.key
+  shell: dotenvx get GF_SSL_PK > "{{ GF_DIR }}/grafana.key"
+  args:
+    chdir: "{{ GF_DIR }}"
+#  register: GF_SSL_PK
+
+- name: Change ownership
+  ansible.builtin.file:
+    path: "{{ GF_DIR }}"
+    state: directory
+    recurse: yes
+    owner: grafana
+    group: grafana
+    mode: '0400'
+
+
 - name: Launch stack
   shell: docker compose up -d
   args:
     chdir: "{{ GF_DIR }}"
+
+- name: Remove grafana.key
+  ansible.builtin.file:
+    path: "{{ GF_DIR }}/grafana.key"
+    state: absent

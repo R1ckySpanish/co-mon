@@ -6,8 +6,8 @@ services:
       - '8429:8429'
     volumes:
       - 'vmagent_data:/vmagent_data'
-      - './targets_cadvisor.json:/cadvisor.json'
-      - './targets_host-metrics.json:/host-metrics.json'
+      - './cadvisor.json:/cadvisor.json'
+      - './host-metrics.json:/host-metrics.json'
       - './promscrape.yml:/promscrape.yml'
     command:
       - '-promscrape.config=promscrape.yml'
