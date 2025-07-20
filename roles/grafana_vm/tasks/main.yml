@@ -18,25 +18,13 @@
     name: grafana
     state: present
 
-- name: Add the user 'grafana' to the group 'grafana'
-  user:
-    name: grafana
-    shell: /bin/nologin
-    groups: grafana
-    append: yes
-
-- name: Copy grafana.ini
-  copy:
-    src: ./files/grafana.ini
-    dest: "{{ GF_DIR }}/grafana.ini"
-    mode: '0644'
+# - name: Add the user 'grafana' to the group 'grafana'
+#   user:
+#     name: grafana
+#     shell: /sbin/nologin
+#     groups: grafana
+#     append: yes
     
-- name: Copy .grafana.crt
-  copy:
-    src: ./ssl/grafana.crt
-    dest: "{{ GF_DIR }}/grafana.crt"
-    mode: '0600'
-
 - name: Copy .env
   copy:
     src: .env
@@ -61,13 +49,38 @@
     chdir: "{{ GF_DIR }}"
 #  register: GF_SSL_PK
 
+- name: Copy .grafana.crt
+  copy:
+    src: ./ssl/grafana.crt
+    dest: "{{ GF_DIR }}/grafana.crt"
+    mode: '0644'
+
+- name: Copy grafana.ini
+  copy:
+    src: ./files/grafana.ini
+    dest: "{{ GF_DIR }}/grafana.ini"
+    mode: '0644'
+
 - name: Change ownership
   ansible.builtin.file:
-    path: "{{ GF_DIR }}"
-    state: directory
-    recurse: yes
+    path: "{{ GF_DIR }}/grafana.ini"
+    state: file
     owner: grafana
-    group: grafana
+    mode: '0644'
+
+- name: Change ownership
+  ansible.builtin.file:
+    path: "{{ GF_DIR }}/grafana.key"
+    state: file
+    owner: grafana
+    mode: '0400'
+
+- name: Change ownership
+  ansible.builtin.file:
+    path: "{{ GF_DIR }}/grafana.crt"
+    state: file
+    owner: grafana
+#    group: grafana
     mode: '0400'
 
 - name: Copy victoria_metrics.yml

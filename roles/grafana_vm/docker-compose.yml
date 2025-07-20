@@ -30,6 +30,7 @@ services:
       - 'grafana_data:/var/lib/grafana/'
       - './grafana.key:/etc/grafana/grafana.key'
       - './grafana.crt:/etc/grafana/grafana.crt'
+      - './grafana.ini:/etc/grafana/grafana.ini'
       - './victoria_metrics.yml:/etc/grafana/provisioning/datasources/victoria_metrics.yml:ro'
     
 
