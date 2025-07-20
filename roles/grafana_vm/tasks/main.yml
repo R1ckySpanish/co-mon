@@ -73,6 +73,7 @@
     path: "{{ GF_DIR }}/grafana.key"
     state: file
     owner: grafana
+    group: grafana
     mode: '0400'
 
 - name: Change ownership
@@ -80,7 +81,7 @@
     path: "{{ GF_DIR }}/grafana.crt"
     state: file
     owner: grafana
-#    group: grafana
+    group: grafana
     mode: '0400'
 
 - name: Copy victoria_metrics.yml
@@ -89,13 +90,7 @@
     dest: "{{ GF_DIR }}/victoria_metrics.yml"
     mode: '0644'
 
-
 - name: Launch stack
   shell: docker compose up -d
   args:
     chdir: "{{ GF_DIR }}"
-
-- name: Remove grafana.key
-  ansible.builtin.file:
-    path: "{{ GF_DIR }}/grafana.key"
-    state: absent
