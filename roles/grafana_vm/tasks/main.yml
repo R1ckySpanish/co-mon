@@ -19,6 +19,18 @@
     dest: "{{ GF_DIR }}/victoria_metrics.yml"
     mode: '0644'
 
+- name: Ensure group 'grafana' exists
+  ansible.builtin.group:
+    name: grafana
+    state: present
+
+- name: Add the user 'grafana' to the group 'grafana'
+  user:
+    name: grafana
+    shell: /bin/nologin
+    groups: grafana
+    append: yes
+
 - name: Copy grafana.ini
   copy:
     src: ./files/grafana.ini
