@@ -36,7 +36,7 @@ scrape_configs:
       
   - job_name: 'windows_exporter'
     static_configs:
-      - targets: [ '127.0.0.1:9182/metrics' ]
+      - targets: [ 'kz:9182/metrics' ]
         labels:
           app: windows_exporter
 

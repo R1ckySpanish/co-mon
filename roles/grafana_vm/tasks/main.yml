@@ -61,13 +61,6 @@
     dest: "{{ GF_DIR }}/grafana.ini"
     mode: '0644'
 
-- name: Change ownership
-  ansible.builtin.file:
-    path: "{{ GF_DIR }}/grafana.ini"
-    state: file
-    owner: grafana
-    group: grafana
-    mode: '0644'
 
 # - name: Change ownership
 #   ansible.builtin.file:
