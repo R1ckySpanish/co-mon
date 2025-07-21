@@ -1,6 +1,9 @@
-- import_tasks: tasks/install_docker.yml
-- import_tasks: tasks/install_dotenvx.yml
-- import_tasks: tasks/install_vector.yml
+- name: Complete common import_tasks
+  import_tasks: [ 'tasks/install_docker.yml', 'tasks/install_dotenvx.yml', 'tasks/install_vector.yml' ]
+  args:
+    chdir: "/roles/common"
+
+
 
 # - name: Complete common tasks
 #   ansible.builtin.include_tasks:

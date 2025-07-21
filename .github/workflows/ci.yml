@@ -1,5 +1,9 @@
 name: ci-pipeline
 on: push
+env:
+  DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
+  ANSIBLE_HOST_KEY_CHECKING: 'False'
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -8,26 +12,14 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    - run: curl -sfS https://dotenvx.sh/install.sh | sh
-      env:
-        DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
-
     - name: Install Ansible
       run: |
-          python -m pip install --upgrade pip
-          pip install ansible
+        python -m pip install --upgrade pip
+        pip install ansible
 
-    - name: Set up SSH key
-      run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/ansible.key
-          chmod 600 ~/.ssh/ansible.key
-          
     - name: Run playbook
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: 'False'
       run: |
-          eval $(ssh-agent -s)
-          echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-          ansible-playbook -i inventory.yml playbook.yml -vv
-          eval "$(ssh-agent -k)"
+        eval $(ssh-agent -s)
+        echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
+        ansible-playbook -i inventory.yml playbook.yml -v
+        eval "$(ssh-agent -k)"
