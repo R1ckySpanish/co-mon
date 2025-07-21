@@ -1,5 +1,5 @@
 - name: Complete common import_tasks
-  import_tasks: [ 'tasks/install_docker.yml', 'tasks/install_dotenvx.yml', 'tasks/install_vector.yml' ]
+  import_tasks: 'tasks/install_*.yml'
   args:
     chdir: "/roles/common"
 
