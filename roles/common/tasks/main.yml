@@ -1,7 +1,6 @@
 - name: Complete common import_tasks
   import_tasks: 'tasks/install_*.yml'
-  args:
-    chdir: "/roles/common"
+
 
 
 
