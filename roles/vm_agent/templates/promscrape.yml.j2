@@ -34,11 +34,11 @@ scrape_configs:
         labels:
           app: vmagent
       
-#  - job_name: 'windows_exporter'
-#    static_configs:
-#      - targets: [ ':9182' ]
-#        labels:
-#          app: vmagent
+  - job_name: 'windows_exporter'
+    static_configs:
+      - targets: [ 'eu:9182/metrics' ]
+        labels:
+          app: windows_exporter
 
      
           
