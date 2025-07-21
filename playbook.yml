@@ -1,20 +1,20 @@
 - name: Install Docker + Vector to all nodes
   hosts: all
   gather_facts: true
-  become: yes
+  become: true
   roles:
     - common
     - vector
 
 - name: Install Grafana + VictoriaMetrics on central node
   hosts: main_node
-  become: yes
+  become: true
   roles:
     - grafana_vm
 
 
 - name: Install VM_agent
   hosts: vmagent_nodes
-  become: yes
+  become: true
   roles:
     - vm_agent
