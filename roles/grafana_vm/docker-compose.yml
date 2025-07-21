@@ -33,8 +33,6 @@ services:
       - './grafana.crt:/etc/grafana/grafana.crt'
       - './grafana.ini:/etc/grafana/grafana.ini'
       - './victoria_metrics.yml:/etc/grafana/provisioning/datasources/victoria_metrics.yml:ro'
-    command:
-      - '--user grafana'
 
 
 
