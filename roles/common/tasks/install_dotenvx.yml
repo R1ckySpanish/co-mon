@@ -1,5 +1,4 @@
 - name: Install Dotenvx
-  command:
   shell: |
     curl -sfS --proto '=https' https://dotenvx.sh/$(uname)/$(uname -m).tgz | tar xz
     sudo install -m 755 dotenvx /usr/local/bin
