@@ -1,3 +1,5 @@
 - name: Complete common tasks
   ansible.builtin.include_tasks:
-    file: [ install_docker.yml, install_dotenvx.yml, install_vector.yml ]
+    file: [ tasks/install_docker.yml, tasks/install_dotenvx.yml, tasks/install_vector.yml ]
+  args:
+    chdir: "/roles/common"
