@@ -18,12 +18,11 @@
     name: grafana
     state: present
 
-# - name: Add the user 'grafana' to the group 'grafana'
-#   user:
-#     name: grafana
-#     shell: /sbin/nologin
-#     groups: grafana
-#     append: yes
+- name: Add the user 'grafana' to the group 'grafana'
+  user:
+    name: grafana
+    groups: grafana, root
+    append: yes
     
 - name: Copy .env
   copy:
@@ -66,6 +65,7 @@
     path: "{{ GF_DIR }}/grafana.ini"
     state: file
     owner: grafana
+    group: grafana
     mode: '0644'
 
 - name: Change ownership
