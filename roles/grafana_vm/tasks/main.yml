@@ -23,6 +23,7 @@
     name: grafana
     groups: grafana, root
     append: yes
+  become_user: root
     
 - name: Copy .env
   copy:
