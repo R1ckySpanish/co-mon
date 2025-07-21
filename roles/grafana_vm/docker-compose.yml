@@ -18,6 +18,7 @@ services:
 
   grafana:
     image: grafana/grafana-oss:latest
+    user: grafana
     container_name: grafana
     depends_on:
       - 'victoriametrics'
