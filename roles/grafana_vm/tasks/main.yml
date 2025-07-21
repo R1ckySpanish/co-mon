@@ -75,7 +75,7 @@
     state: file
     owner: grafana
     group: grafana
-    mode: '0400'
+    mode: '0644'
 
 - name: Change ownership
   ansible.builtin.file:
@@ -83,7 +83,7 @@
     state: file
     owner: grafana
     group: grafana
-    mode: '0440'
+    mode: '0644'
 
 - name: Copy victoria_metrics.yml
   copy:
