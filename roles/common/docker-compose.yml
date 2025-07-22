@@ -1,22 +1,4 @@
 services:
-
-  vector:
-    image: timberio/vector:nightly-debian
-    container_name: vector
-    ports:
-      - 8686:8686
-      - 9598:9598
-    volumes:
-      - "vector.toml:/vector.toml:ro"
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /:/host:ro
-    environment:
-      HOST_PROC: /host/proc
-      HOST_SYS: /host/sys
-      HOST_ETC: /host/etc
-    command: ["--config", "/vector.toml"]
-    restart: always
-
   cadvisor:
     container_name: cadvisor
     image: gcr.io/cadvisor/cadvisor:latest
