@@ -17,5 +17,5 @@ all:
       hosts: 
         kz:
           ansible_host: 38.180.207.69
-vars:
-  ansible_user: ansible 
+  vars:
+    ansible_user: ansible 
