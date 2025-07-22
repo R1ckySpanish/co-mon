@@ -1,8 +1,8 @@
-- name: Import nginx install task
-  import_tasks: install_docker.yml
+- name: Docker install task
+  import_tasks: tasks/install_docker.yml
 
-- name: Import apache install task
+- name: Dotenvx install task
   import_tasks: tasks/install_dotenvx.yml
 
-- name: Import apache install task
+- name: Vector install task
   import_tasks: tasks/vector.yml
