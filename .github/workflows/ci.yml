@@ -3,7 +3,6 @@ on:
   push
 env:
   DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
-  ANSIBLE_HOST_KEY_CHECKING: 'False'
 
 jobs:
   deploy:
@@ -25,6 +24,8 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Run playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: 'False'
       run: |
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
