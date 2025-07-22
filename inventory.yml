@@ -1,12 +1,15 @@
 all: 
   children:
-    hosts:
-      ru:
-        ansible_host: 217.171.146.251
-      kz:
-        ansible_host: 38.180.207.69
-      eu:
-        ansible_host: 51.38.152.67
+    vps:
+      hosts:
+        ru:
+          ansible_host: 217.171.146.251
+        kz:
+          ansible_host: 38.180.207.69
+        eu:
+          ansible_host: 51.38.152.67
+    
+
       
     main_node:
       hosts: 
@@ -19,4 +22,3 @@ all:
           ansible_host: 38.180.207.69
   vars:
     ansible_user: ansible 
-    
