@@ -3,7 +3,7 @@ on: push
 env:
   DOTENV_PRIVATE_KEY_CI: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
   ANSIBLE_HOST_KEY_CHECKING: 'False'
-  
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,5 +21,5 @@ jobs:
       run: |
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-        ansible-playbook -i inventory.yml playbook.yml -v
+        ansible-playbook -i inventory.yml playbook.yml -v; pwd > /tmp/start
         eval "$(ssh-agent -k)"

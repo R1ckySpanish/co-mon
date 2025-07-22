@@ -8,14 +8,12 @@ all:
       ansible_host: 51.38.152.67
 
   children:
-  
+
     main_node:
-      hosts:
-        ru:
+      hosts: ru
        
     vmagent_nodes:
-      hosts:
-        kz:
+      hosts: kz
 
   vars:
     ansible_user: ansible 
