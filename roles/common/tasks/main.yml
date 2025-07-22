@@ -1,8 +1,8 @@
 - name: Docker install task
-  import_tasks: ./common/tasks/install_docker.yml
+  include_tasks: ./common/tasks/install_docker.yml
 
 - name: Dotenvx install task
-  import_tasks: ./common/tasks/install_dotenvx.yml
+  include_tasks: ./common/tasks/install_dotenvx.yml
 
 - name: Vector install task
-  import_tasks: ./common/tasks/vector.yml
+  include_tasks: ./common/tasks/vector.yml

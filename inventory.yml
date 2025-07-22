@@ -1,14 +1,17 @@
-all:
-  hosts:
-    ru:
-      ansible_host: 217.171.146.251
-    kz:
-      ansible_host: 38.180.207.69
-    eu:
-      ansible_host: 51.38.152.67
-
+all: 
   children:
+<<<<<<< HEAD
 
+=======
+    hosts:
+      ru:
+        ansible_host: 217.171.146.251
+      kz:
+        ansible_host: 38.180.207.69
+      eu:
+        ansible_host: 51.38.152.67
+      
+>>>>>>> parent of 6a5ee40 (rw inv)
     main_node:
       hosts: ru
        
