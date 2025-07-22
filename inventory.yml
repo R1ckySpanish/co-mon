@@ -11,11 +11,11 @@ all:
     main_node:
       hosts: 
         ru:
-        ansible_host: 217.171.146.251
+          ansible_host: 217.171.146.251
+
     vmagent_nodes:
       hosts: 
         kz:
           ansible_host: 38.180.207.69
-
-  vars:
-    ansible_user: ansible 
+vars:
+  ansible_user: ansible 
