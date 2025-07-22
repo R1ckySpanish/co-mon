@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-- name: Docker install task
-  include_tasks: ./common/tasks/install_docker.yml
-
-- name: Dotenvx install task
-  include_tasks: ./common/tasks/install_dotenvx.yml
-
-- name: Vector install task
-  include_tasks: ./common/tasks/vector.yml
-=======
 - name: Install Docker dependencies
   apt:
     name:
@@ -57,4 +47,3 @@
 
 - name: Launch stack
   shell: docker compose up -d
->>>>>>> parent of c0da7f9 (rw common role)
