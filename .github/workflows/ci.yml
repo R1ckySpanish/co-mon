@@ -24,10 +24,10 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Run playbook
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: 'False'
+      # env:
+      #   ANSIBLE_HOST_KEY_CHECKING: 'False'
       run: |
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -vv
+        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -vv --extra-vars "ansible_become_pass=False"
         eval "$(ssh-agent -k)"
