@@ -24,12 +24,12 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Run playbook
-      # env:
-      #   ANSIBLE_HOST_KEY_CHECKING: 'False'
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: 'False'
+        ANSIBLE_CONFIG: '~/.ansible.cfg'
       run: |
-        echo -e "[defaults]  \nask_become_pass = false" >  ~/.ansible.cfg
-        ANSIBLE_CONFIG='~/.ansible.cfg'
+        echo -e "[defaults]  \nask_become_pass = false" >  '~/.ansible.cfg'
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -vv --extra-vars "ansible_become_pass=False"
+        ansible-playbook -i inventory.yml playbook.yml -vvv
         eval "$(ssh-agent -k)"
