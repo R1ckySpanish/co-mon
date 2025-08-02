@@ -21,4 +21,6 @@ all:
         kz:
           ansible_host: 38.180.207.69
   vars:
-    ansible_user: ansible 
+    ansible_user: ansible
+    ansible_become: true
+    ansible_become_method: sudo
