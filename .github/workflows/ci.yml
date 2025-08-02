@@ -27,10 +27,9 @@ jobs:
       # env:
       #   ANSIBLE_HOST_KEY_CHECKING: 'False'
       run: |
-        ANSIBLE_CONFIG='~/.ansible.cfg'
-        echo "[defaults] \
-        ask_become_pass = false" > ANSIBLE_CONFIG
-        
+        echo '[defaults] \
+        ask_become_pass = false' > '~/.ansible.cfg'
+
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
         ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -vv --extra-vars "ansible_become_pass=False"
