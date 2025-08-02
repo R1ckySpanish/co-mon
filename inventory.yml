@@ -8,9 +8,7 @@ all:
           ansible_host: 38.180.207.69
         eu:
           ansible_host: 5.144.182.212
-    
-
-      
+       
     main_node:
       hosts: 
         ru:
@@ -20,6 +18,7 @@ all:
       hosts: 
         kz:
           ansible_host: 38.180.207.69
+          
   vars:
     ansible_user: ansible
     ansible_become: true
