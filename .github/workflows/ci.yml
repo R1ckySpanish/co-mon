@@ -27,8 +27,8 @@ jobs:
       env:
         ANSIBLE_CONFIG: '/etc/ansible/ansible.cfg'
       run: |
-        mkdir -p /etc/ansible
-        echo -e "[defaults]  \nask_become_pass = false" > $ANSIBLE_CONFIG
+        sudo mkdir -p /etc/ansible
+        sudo echo -e "[defaults]  \nask_become_pass = false" > $ANSIBLE_CONFIG
 
 
     - name: Run playbook
