@@ -29,5 +29,5 @@ jobs:
       run: |
         eval $(ssh-agent -s)
         echo "${{ secrets.SSH_KEY }}" | tr -d "\r" | ssh-add -
-        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -v; pwd > /tmp/start
+        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml playbook.yml -vv
         eval "$(ssh-agent -k)"
