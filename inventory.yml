@@ -7,7 +7,7 @@ all:
         kz:
           ansible_host: 38.180.207.69
         eu:
-          ansible_host: 51.38.152.67
+          ansible_host: 5.144.182.212
     
 
       
