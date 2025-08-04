@@ -1,6 +1,6 @@
 [
     {
-    "targets": [ "ru:8080", "kz:8080", "eu:8080" ],
+    "targets": [ "ru:8088", "kz:8088", "eu:8088" ],
     "labels": {
       "job": "cadvisor",
       "app": "cadvisor"
