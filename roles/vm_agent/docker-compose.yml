@@ -15,7 +15,7 @@ services:
       - '-promscrape.fileSDCheckInterval=30s'
     restart: always
     extra_hosts:
-      { "ru": "217.171.146.251", "kz": "38.180.207.69", "eu": "51.38.152.67" }
+      { "ru": "217.171.146.251", "kz": "38.180.207.69", "eu": "5.144.182.212" }
       
       
 volumes:
