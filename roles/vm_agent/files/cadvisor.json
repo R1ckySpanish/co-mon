@@ -3,7 +3,7 @@
     "targets": [ "ru:8088", "kz:8088", "eu:8088" ],
     "labels": {
       "job": "cadvisor",
-      "app": "cadvisor"
+      "app": "docker"
       }
     }
 ]
