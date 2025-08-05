@@ -15,5 +15,5 @@ services:
     devices: 
       - "/dev/kmsg"
     extra_hosts:
-      - "host.docker.internal": "{{ ansible_host }}"
+      { "host.docker.internal": "{{ ansible_host }}" }
 #      "host.docker.internal": "{{ inventory_hostname }}"
