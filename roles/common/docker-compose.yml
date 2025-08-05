@@ -14,7 +14,5 @@ services:
     privileged: true
     devices: 
       - "/dev/kmsg"
-    env:
-      - inventory_host_ipv4: "hostvars['{{ inventory_hostname }}']['ansible_default_ipv4']['address']"
     extra_hosts: 
       { "host.docker.internal": "inventory_host_ipv4" }
