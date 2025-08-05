@@ -39,7 +39,7 @@
     creates: /usr/local/bin/dotenvx
 
 - name: Define var <host_ipv4>
-  debug: msg={{ hostvars[inventory_hostname][address] }}
+  debug: msg={{ hostvars[inventory_hostname][ansible_default_ipv4][address][address] }}
 
 - name: Copy docker-compose.yml
   copy:
