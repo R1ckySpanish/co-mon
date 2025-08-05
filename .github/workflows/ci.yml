@@ -24,11 +24,9 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Ansible cfg
-      # env:
-      #   ANSIBLE_CONFIG: './ansible.cfg'
       run: |
         touch ansible.cfg
-        echo -e "[defaults]  \nask_become_pass = false" > ansible.cfg
+        echo -e "[defaults]  \nask_become_pass = false \nenable_task_debugger = True" > ansible.cfg
 
 
     - name: Run playbook
