@@ -44,6 +44,7 @@
     src: docker-compose.yml
     dest: docker-compose.yml
     mode: '0644'
+  debugger: always
 
 - name: Launch stack
   shell: docker compose up -d
