@@ -38,10 +38,10 @@
   args:
     creates: /usr/local/bin/dotenvx
 
-- name: Run setup
+- name: Define 'host_ipv4' var
   ansible.builtin.setup:
     filter:
-      - "[all_ipv4_addresses][ansible_default_ipv4][address]"
+      - "{{ hostvars[inventory_hostname][all_ipv4_addresses][ansible_default_ipv4][address] }}"
   register: host_ipv4
 
 - name: Copy docker-compose.yml
