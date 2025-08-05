@@ -15,6 +15,6 @@ services:
     devices: 
       - "/dev/kmsg"
     environment:
-      - inventory_host_ipv4=${inventory_host_ipv4}
+      - host_ipv4=${host_ipv4}
     extra_hosts: 
-      { "host.docker.internal": "${inventory_host_ipv4}" }
+      { "host.docker.internal": "${host_ipv4}" }

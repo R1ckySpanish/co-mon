@@ -38,9 +38,10 @@
   args:
     creates: /usr/local/bin/dotenvx
 
+- name: Define var <host_ipv4>
+  debug: msg={{ hostvars[inventory_hostname][ansible_default_ipv4][address] }}
 
 - name: Copy docker-compose.yml
-  gather_facts: true
   copy:
     src: docker-compose.yml
     dest: docker-compose.yml
