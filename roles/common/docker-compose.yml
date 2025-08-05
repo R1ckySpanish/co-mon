@@ -14,7 +14,7 @@ services:
     privileged: true
     devices: 
       - "/dev/kmsg"
-    environment:
-      - host_ipv4=${host_ipv4}
+    # environment:
+    #   - host_ipv4=${host_ipv4}
     extra_hosts: 
       { "host.docker.internal": "${host_ipv4}" }
