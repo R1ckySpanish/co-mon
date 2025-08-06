@@ -62,22 +62,6 @@
     mode: '0644'
 
 
-# - name: Change ownership
-#   ansible.builtin.file:
-#     path: "{{ GF_DIR }}/grafana.key"
-#     state: file
-#     owner: grafana
-#     group: grafana
-#     mode: '0644'
-
-# - name: Change ownership
-#   ansible.builtin.file:
-#     path: "{{ GF_DIR }}/grafana.crt"
-#     state: file
-#     owner: grafana
-#     group: grafana
-#     mode: '0644'
-
 - name: Copy victoria_metrics.yml
   copy:
     src: ./provisioning/datasources/victoria_metrics.yml
