@@ -12,6 +12,7 @@ services:
       - '-httpListenAddr=:8428'
       - '-selfScrapeInterval=15s'
       - '-promscrape.fileSDCheckInterval=1m'
+      - '-retentionPeriod=14d'
     restart: always      
 
      
